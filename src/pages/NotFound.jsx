@@ -16,7 +16,7 @@ export default function NotFound() {
 
         {/* Error Details */}
         <p className="text-gray-500 mb-6">
-          Sorry, the page you are looking for doesn’t exist or has been moved.
+          Sorry, the page you are looking for doesn't exist.
         </p>
 
         {error?.statusText || error?.message ? (
