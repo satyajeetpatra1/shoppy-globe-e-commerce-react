@@ -45,7 +45,7 @@ function Header() {
             <span
               className="
               absolute -top-2 -right-3
-              bg-white text-indigo-600
+              bg-yellow-300 text-indigo-600
               text-xs font-bold
               w-5 h-5
               rounded-full
