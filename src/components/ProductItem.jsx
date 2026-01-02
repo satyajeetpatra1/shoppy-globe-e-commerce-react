@@ -6,7 +6,7 @@ export default function ProductItem({ product }) {
       <img
         loading="lazy"
         src={product.thumbnail}
-        className="h-40 w-full object-cover"
+        className="h-40 w-full object-contain"
       />
       <h3 className="font-bold">{product.title}</h3>
       <p>₹{product.price}</p>
