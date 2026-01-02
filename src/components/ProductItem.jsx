@@ -29,13 +29,12 @@ export default function ProductItem({ product }) {
         {!cartItem ? (
           <button
             onClick={() => dispatch(addToCart(product))}
-            className="bg-black text-white px-3 py-1 rounded"
+            className="bg-black text-white px-3 py-1 rounded cursor-pointer"
           >
             Add
           </button>
         ) : (
           <div className="flex items-center gap-4">
-
             <button
               onClick={() =>
                 dispatch(
@@ -44,7 +43,7 @@ export default function ProductItem({ product }) {
                     : decreaseQty(product.id)
                 )
               }
-              className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:bg-gray-50"
+              className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:bg-gray-50 cursor-pointer"
             >
               {cartItem.quantity === 1 ? "delete" : "-"}
             </button>
@@ -53,7 +52,7 @@ export default function ProductItem({ product }) {
 
             <button
               onClick={() => dispatch(increaseQty(product.id))}
-              className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
+              className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 cursor-pointer"
             >
               +
             </button>
