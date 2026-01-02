@@ -63,7 +63,6 @@ function Checkout() {
       <h1 className="text-2xl font-bold mb-8">Checkout</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Left: Checkout Form */}
         <form
           onSubmit={handleSubmit}
           className="bg-white rounded-2xl shadow-md p-6 space-y-5"
@@ -84,7 +83,7 @@ function Checkout() {
                   ? "border-red-500 focus:ring-red-200"
                   : "focus:ring-black"
               }`}
-              placeholder="John Doe"
+              placeholder="Enter Your Name..."
             />
             {errors.name && (
               <p className="text-red-500 text-sm mt-1">{errors.name}</p>
@@ -107,7 +106,7 @@ function Checkout() {
                   ? "border-red-500 focus:ring-red-200"
                   : "focus:ring-black"
               }`}
-              placeholder="john@example.com"
+              placeholder="Enter your mail id..."
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">{errors.email}</p>
@@ -128,19 +127,18 @@ function Checkout() {
                   ? "border-red-500 focus:ring-red-200"
                   : "focus:ring-black"
               }`}
-              placeholder="Street, City, State"
+              placeholder="Enter Your Address..."
             />
             {errors.address && (
               <p className="text-red-500 text-sm mt-1">{errors.address}</p>
             )}
           </div>
 
-          {/* Place Order */}
           <button
             type="submit"
             className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:bg-gray-800 transition"
           >
-            Place Order • ₹{totalAmount}
+            Place Order • ₹{totalAmount.toFixed(2)}
           </button>
         </form>
 
@@ -152,7 +150,7 @@ function Checkout() {
             {items.map((item) => (
               <div key={item.id} className="flex justify-between text-sm">
                 <span>
-                  {item.title} × {item.quantity}
+                  {item.title} x {item.quantity}
                 </span>
                 <span>₹{item.price * item.quantity}</span>
               </div>
@@ -163,7 +161,7 @@ function Checkout() {
 
           <div className="flex justify-between font-semibold text-lg">
             <span>Total</span>
-            <span>₹{totalAmount}</span>
+            <span>₹{totalAmount.toFixed(2)}</span>
           </div>
         </div>
       </div>
