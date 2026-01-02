@@ -24,7 +24,7 @@ export default function ProductItem({ product }) {
       <h3 className="font-bold">{product.title}</h3>
       <p>₹{product.price}</p>
       <div className="flex justify-between mt-2">
-        <Link to={`/product/${product.id}`} className="text-blue-500">
+        <Link to={`/product/${product.id}`} className="bg-blue-500 text-white my-auto px-2 py-1 rounded-md hover:bg-blue-600">
           View
         </Link>
         {!cartItem ? (
