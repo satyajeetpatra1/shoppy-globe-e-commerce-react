@@ -6,6 +6,7 @@ import {
   increaseQty,
   removeFromCart,
 } from "../utils/CartSlice";
+import { MdOutlineDelete } from "react-icons/md";
 
 export default function ProductItem({ product }) {
   const dispatch = useDispatch();
@@ -43,16 +44,16 @@ export default function ProductItem({ product }) {
                     : decreaseQty(product.id)
                 )
               }
-              className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:bg-gray-50 cursor-pointer"
+              className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:bg-gray-50 cursor-pointer h-full"
             >
-              {cartItem.quantity === 1 ? "delete" : "-"}
+              {cartItem.quantity === 1 ? <MdOutlineDelete /> : "-"}
             </button>
 
             <span className="text-lg font-semibold">{cartItem.quantity}</span>
 
             <button
               onClick={() => dispatch(increaseQty(product.id))}
-              className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 cursor-pointer"
+              className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 cursor-pointer h-full"
             >
               +
             </button>
