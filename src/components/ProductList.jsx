@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import ProductItem from "./ProductItem";
 import { useFetchProducts } from "../utils/useFetchProducts";
 
-export default function ProductList() {
+function ProductList() {
   const { products, error } = useFetchProducts();
   const search = useSelector((store) => store.cart.search);
 
@@ -18,3 +18,5 @@ export default function ProductList() {
     </div>
   );
 }
+
+export default ProductList;

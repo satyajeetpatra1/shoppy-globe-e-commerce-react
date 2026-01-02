@@ -9,7 +9,7 @@ import {
 } from "../utils/CartSlice";
 import { MdAdd, MdRemove, MdOutlineDelete } from "react-icons/md";
 
-export default function ProductDetail() {
+function ProductDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -108,3 +108,5 @@ export default function ProductDetail() {
     </div>
   );
 }
+
+export default ProductDetail;

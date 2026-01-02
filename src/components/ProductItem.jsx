@@ -8,7 +8,7 @@ import {
 } from "../utils/CartSlice";
 import { MdAdd, MdRemove, MdOutlineDelete } from "react-icons/md";
 
-export default function ProductItem({ product }) {
+function ProductItem({ product }) {
   const dispatch = useDispatch();
 
   const cartItems = useSelector((state) => state.cart.items);
@@ -70,3 +70,5 @@ export default function ProductItem({ product }) {
     </div>
   );
 }
+
+export default ProductItem;
