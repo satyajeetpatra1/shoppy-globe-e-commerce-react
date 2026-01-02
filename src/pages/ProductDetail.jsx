@@ -69,41 +69,33 @@ export default function ProductDetail() {
           {!cartItem ? (
             <button
               onClick={() => dispatch(addToCart(product))}
-              className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition"
+              className="bg-black text-white px-3 py-1 rounded"
             >
-              Add to Cart
+              Add
             </button>
           ) : (
-            <div className="flex flex-col gap-4">
-              {/* Quantity Controls */}
-              <div className="flex items-center gap-4">
-                {/* Remove */}
-                <button
-                  onClick={() => dispatch(removeFromCart(product.id))}
-                  className="text-red-600 hover:underline text-sm"
-                >
-                  Remove from Cart
-                </button>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() =>
+                  dispatch(
+                    cartItem.quantity === 1
+                      ? removeFromCart(product.id)
+                      : decreaseQty(product.id)
+                  )
+                }
+                className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:bg-gray-50"
+              >
+                {cartItem.quantity === 1 ? "delete" : "-"}
+              </button>
 
-                <button
-                  onClick={() => dispatch(decreaseQty(product.id))}
-                  className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:bg-gray-50"
-                  disabled={cartItem.quantity === 1}
-                >
-                  -
-                </button>
+              <span className="text-lg font-semibold">{cartItem.quantity}</span>
 
-                <span className="text-lg font-semibold">
-                  {cartItem.quantity}
-                </span>
-
-                <button
-                  onClick={() => dispatch(increaseQty(product.id))}
-                  className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
-                >
-                  +
-                </button>
-              </div>
+              <button
+                onClick={() => dispatch(increaseQty(product.id))}
+                className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
+              >
+                +
+              </button>
             </div>
           )}
         </div>

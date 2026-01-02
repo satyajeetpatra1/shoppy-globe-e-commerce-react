@@ -14,7 +14,7 @@ export default function ProductItem({ product }) {
   const cartItem = cartItems.find((item) => item.id == product.id);
 
   return (
-    <div className="bg-white p-4 rounded shadow">
+    <div className="bg-white p-4 rounded shadow-black/75 outline outline-slate-300 transition duration-100 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl">
       <img
         loading="lazy"
         src={product.thumbnail}
