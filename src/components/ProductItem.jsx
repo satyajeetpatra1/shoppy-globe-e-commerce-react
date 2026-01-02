@@ -6,7 +6,7 @@ import {
   increaseQty,
   removeFromCart,
 } from "../utils/CartSlice";
-import { MdOutlineDelete } from "react-icons/md";
+import { MdAdd, MdRemove, MdOutlineDelete } from "react-icons/md";
 
 export default function ProductItem({ product }) {
   const dispatch = useDispatch();
@@ -24,7 +24,10 @@ export default function ProductItem({ product }) {
       <h3 className="font-bold">{product.title}</h3>
       <p>₹{product.price}</p>
       <div className="flex justify-between mt-2">
-        <Link to={`/product/${product.id}`} className="bg-blue-500 text-white my-auto px-2 py-1 rounded-md hover:bg-blue-600">
+        <Link
+          to={`/product/${product.id}`}
+          className="bg-blue-500 text-white my-auto px-2 py-1 rounded-md hover:bg-blue-600"
+        >
           View
         </Link>
         {!cartItem ? (
@@ -40,22 +43,26 @@ export default function ProductItem({ product }) {
               onClick={() =>
                 dispatch(
                   cartItem.quantity === 1
-                    ? removeFromCart(product.id)
-                    : decreaseQty(product.id)
+                    ? removeFromCart(cartItem.id)
+                    : decreaseQty(cartItem.id)
                 )
               }
-              className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:bg-gray-50 cursor-pointer h-full"
+              className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center transition"
             >
-              {cartItem.quantity === 1 ? <MdOutlineDelete /> : "-"}
+              {cartItem.quantity === 1 ? (
+                <MdOutlineDelete className="text-lg text-red-500" />
+              ) : (
+                <MdRemove className="text-lg" />
+              )}
             </button>
 
             <span className="text-lg font-semibold">{cartItem.quantity}</span>
 
             <button
-              onClick={() => dispatch(increaseQty(product.id))}
-              className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 cursor-pointer h-full"
+              onClick={() => dispatch(increaseQty(cartItem.id))}
+              className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center transition"
             >
-              +
+              <MdAdd className="text-lg" />
             </button>
           </div>
         )}
