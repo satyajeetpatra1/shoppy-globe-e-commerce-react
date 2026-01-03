@@ -8,8 +8,10 @@ function App() {
       {/* header */}
       <Header />
 
-      {/* router outlet */}
-      <Outlet />
+      <div className="h-full min-h-screen">
+        {/* router outlet */}
+        <Outlet />
+      </div>
 
       {/* footer */}
       <Footer />
