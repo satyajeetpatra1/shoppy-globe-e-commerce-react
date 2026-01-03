@@ -5,8 +5,13 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <div className="min-h-screen bg-gray-100">
+      {/* header */}
       <Header />
+
+      {/* router outlet */}
       <Outlet />
+
+      {/* footer */}
       <Footer />
     </div>
   );

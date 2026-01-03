@@ -1,6 +1,7 @@
 import { Link, useRouteError } from "react-router-dom";
 
 function NotFound() {
+  // to get what went wrong
   const error = useRouteError();
 
   return (

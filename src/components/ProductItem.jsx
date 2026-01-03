@@ -1,21 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+// actions
 import {
   addToCart,
   decreaseQty,
   increaseQty,
   removeFromCart,
 } from "../utils/CartSlice";
+// react-icons
 import { MdAdd, MdRemove, MdOutlineDelete } from "react-icons/md";
 
 function ProductItem({ product }) {
+  // to dispatch an action
   const dispatch = useDispatch();
 
-  const cartItems = useSelector((state) => state.cart.items);
+  // cart from store
+  const cartItems = useSelector((store) => store.cart.items);
+
+  // current item data from cart if available
   const cartItem = cartItems.find((item) => item.id == product.id);
 
   return (
     <div className="bg-white p-4 rounded shadow-black/75 outline outline-slate-300 transition duration-100 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl">
+      {/* lazy loading image */}
       <img
         loading="lazy"
         src={product.thumbnail}
@@ -24,12 +31,16 @@ function ProductItem({ product }) {
       <h3 className="font-bold">{product.title}</h3>
       <p>₹{product.price}</p>
       <div className="flex justify-between mt-2">
+        {/* click to view product details | Link to ProductDetail Component */}
         <Link
           to={`/product/${product.id}`}
           className="bg-blue-500 text-white my-auto px-2 py-1 rounded-md hover:bg-blue-600"
         >
           View
         </Link>
+
+        {/* If product available in cart give option to increase or decrease the quantity 
+        | if not then option to add to cart */}
         {!cartItem ? (
           <button
             onClick={() => dispatch(addToCart(product))}

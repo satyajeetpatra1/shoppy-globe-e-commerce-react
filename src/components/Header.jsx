@@ -1,15 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
+// action
 import { setSearch } from "../utils/CartSlice";
 import { Link } from "react-router-dom";
 
 function Header() {
+  // to dispatch an action
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items);
+
+  // cart items from store
+  const cartItems = useSelector((store) => store.cart.items);
 
   return (
     <header className="bg-indigo-600 sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3 flex flex-wrap gap-4 items-center justify-between">
-        {/* Logo */}
+        {/* Logo and link to root */}
         <Link to="/" className="text-2xl font-bold text-white tracking-wide">
           ShoppyGlobe <span className="text-indigo-200">🌍</span>
         </Link>
@@ -19,6 +23,7 @@ function Header() {
           <input
             type="text"
             placeholder="Search products..."
+            // set search = input value in store
             onChange={(e) => dispatch(setSearch(e.target.value))}
             className="
               w-full
@@ -41,6 +46,8 @@ function Header() {
         >
           <span className="text-xl">🛒</span>
           Cart
+
+          {/* no. of items in cart */}
           {cartItems.length > 0 && (
             <span
               className="

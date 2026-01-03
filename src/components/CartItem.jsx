@@ -1,14 +1,17 @@
 import { useDispatch } from "react-redux";
+// actions
 import { decreaseQty, increaseQty, removeFromCart } from "../utils/CartSlice";
+// react-icons
 import { MdAdd, MdRemove, MdOutlineDelete } from "react-icons/md";
 
 function CartItem({ item }) {
+  // to dispatch an action
   const dispatch = useDispatch();
 
   return (
     <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition p-5 mb-4">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-        {/* Left: Image + Info */}
+        {/* Image + Info */}
         <div className="flex items-center gap-4">
           <img
             src={item.thumbnail}
@@ -25,15 +28,15 @@ function CartItem({ item }) {
             <p className="text-sm text-gray-500 mt-1">Price: ₹{item.price}</p>
 
             <p className="text-sm font-medium text-gray-700 mt-1">
-              Subtotal: ₹{item.price * item.quantity}
+              {/* show price upto 2 digits */}
+              Subtotal: ₹{(item.price * item.quantity).toFixed(2)}
             </p>
           </div>
         </div>
 
-        {/* Right: Controls */}
         <div className="flex flex-col sm:flex-row items-center gap-4">
-          {/* Quantity Controller */}
           <div className="flex items-center border rounded-lg overflow-hidden">
+            {/* if quantity is 1 then remove from cart | if quantity>1 decrease the quantity in cart */}
             <button
               onClick={() =>
                 dispatch(
@@ -53,6 +56,7 @@ function CartItem({ item }) {
 
             <span className="px-5 font-semibold">{item.quantity}</span>
 
+            {/* increase the quantity in cart */}
             <button
               onClick={() => dispatch(increaseQty(item.id))}
               className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center transition"

@@ -41,7 +41,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    {/* providing store to the complete DOM Tree */}
     <Provider store={store}>
+      {/* providing Routes */}
       <RouterProvider router={router} />
     </Provider>
   </StrictMode>

@@ -3,18 +3,22 @@ import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
 
 function Cart() {
-  const items = useSelector((state) => state.cart.items);
+  // cart Items from store
+  const items = useSelector((store) => store.cart.items);
 
+  // check if cart is empty
   const isCartEmpty = items.length === 0;
 
   return (
     <div className="max-w-5xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Your Cart</h1>
 
+      {/* if cart is empty so empty cart message | if not show cart items list and checkout option */}
       {isCartEmpty ? (
         <p className="text-gray-500 text-center mt-10">Your cart is empty.</p>
       ) : (
         <>
+          {/* map function to show each cart item */}
           {items.map((item) => (
             <CartItem key={item.id} item={item} />
           ))}

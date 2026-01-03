@@ -1,26 +1,34 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+// actions
 import { clearCart } from "../utils/CartSlice";
 
 function Checkout() {
+  // to dispatch an action
   const dispatch = useDispatch();
+  // to navigate to other page
   const navigate = useNavigate();
-  const items = useSelector((state) => state.cart.items);
+  // cart items from store
+  const items = useSelector((store) => store.cart.items);
 
+  // form data for validations
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     address: "",
   });
 
+  // error list to show in UI if any
   const [errors, setErrors] = useState({});
 
+  // calculating total amount using reduce function
   const totalAmount = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
+  // validate form data
   const validate = () => {
     const newErrors = {};
 
@@ -39,9 +47,12 @@ function Checkout() {
     }
 
     setErrors(newErrors);
+
+    // return true if errors of object is empty else return false
     return Object.keys(newErrors).length === 0;
   };
 
+  // submit if form is valid
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -52,6 +63,7 @@ function Checkout() {
     navigate("/");
   };
 
+  // If cart is empty no option to checkout
   if (items.length === 0) {
     return (
       <p className="text-center text-gray-500 mt-20">Your cart is empty.</p>
@@ -63,6 +75,7 @@ function Checkout() {
       <h1 className="text-2xl font-bold mb-8">Checkout</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* form to get user details */}
         <form
           onSubmit={handleSubmit}
           className="bg-white rounded-2xl shadow-md p-6 space-y-5"
@@ -142,17 +155,19 @@ function Checkout() {
           </button>
         </form>
 
-        {/* Right: Order Summary */}
+        {/* Order Summary */}
         <div className="bg-white rounded-2xl shadow-md p-6">
           <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
 
+          {/* list of cart items */}
           <div className="space-y-4">
             {items.map((item) => (
               <div key={item.id} className="flex justify-between text-sm">
                 <span>
                   {item.title} x {item.quantity}
                 </span>
-                <span>₹{item.price * item.quantity}</span>
+                {/* upto 2 digits for amount */}
+                <span>₹{(item.price * item.quantity).toFixed(2)}</span>
               </div>
             ))}
           </div>
@@ -161,6 +176,7 @@ function Checkout() {
 
           <div className="flex justify-between font-semibold text-lg">
             <span>Total</span>
+            {/* upto 2 digits for amount */}
             <span>₹{totalAmount.toFixed(2)}</span>
           </div>
         </div>

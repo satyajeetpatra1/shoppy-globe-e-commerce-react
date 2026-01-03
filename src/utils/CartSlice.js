@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// cart slice using redux and RTK
 const cartSlice = createSlice({
   name: "cart",
   initialState: {

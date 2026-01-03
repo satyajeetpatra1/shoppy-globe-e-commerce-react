@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// actions
 import {
   addToCart,
   decreaseQty,
@@ -10,15 +11,22 @@ import {
 import { MdAdd, MdRemove, MdOutlineDelete } from "react-icons/md";
 
 function ProductDetail() {
+  // get id from dynamic route
   const { id } = useParams();
+
+  // to dispatch an action
   const dispatch = useDispatch();
 
-  const cartItems = useSelector((state) => state.cart.items);
+  // cart items from store
+  const cartItems = useSelector((store) => store.cart.items);
+
+  // get item data from cart if available
   const cartItem = cartItems.find((item) => item.id === Number(id));
 
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
 
+  // get product data from api
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
       .then((res) => {
@@ -29,10 +37,12 @@ function ProductDetail() {
       .catch(() => setError("Failed to load product details"));
   }, [id]);
 
+  // show error message if error while api calling
   if (error) {
     return <p className="text-center text-red-500 mt-10">{error}</p>;
   }
 
+  // show loading while product is being fetched
   if (!product) {
     return <p className="text-center mt-10">Loading product...</p>;
   }
@@ -42,6 +52,7 @@ function ProductDetail() {
       <div className="bg-white rounded-2xl shadow-lg grid grid-cols-1 md:grid-cols-2 gap-10 p-8">
         {/* Product Image */}
         <div className="flex justify-center">
+          {/* lazy loading image */}
           <img
             src={product.thumbnail}
             alt={product.title}
@@ -67,6 +78,8 @@ function ProductDetail() {
           </p>
 
           {/* Cart Actions */}
+          {/* If product available in cart give option to increase or decrease the quantity 
+          | if not then option to add to cart */}
           {!cartItem ? (
             <button
               onClick={() => dispatch(addToCart(product))}

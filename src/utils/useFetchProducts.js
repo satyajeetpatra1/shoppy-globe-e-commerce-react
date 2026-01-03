@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// customhook for api calling
 export const useFetchProducts = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
