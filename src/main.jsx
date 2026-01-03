@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import { Provider } from "react-redux";
 import { store } from "./utils/store.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Loader from "./components/Loader.jsx";
 
 // lazy loading
 const Home = lazy(() => import("./pages/Home.jsx"));
@@ -12,12 +13,6 @@ const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail.jsx"));
 const Cart = lazy(() => import("./pages/Cart.jsx"));
 const Checkout = lazy(() => import("./pages/Checkout.jsx"));
-
-const Loader = () => (
-  <div className="flex justify-center items-center h-screen">
-    <p className="text-gray-500">Loading...</p>
-  </div>
-);
 
 const router = createBrowserRouter([
   {
