@@ -1,4 +1,4 @@
-import { lazy, StrictMode } from "react";
+import { lazy, StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
@@ -13,27 +13,53 @@ const ProductDetail = lazy(() => import("./pages/ProductDetail.jsx"));
 const Cart = lazy(() => import("./pages/Cart.jsx"));
 const Checkout = lazy(() => import("./pages/Checkout.jsx"));
 
+const Loader = () => (
+  <div className="flex justify-center items-center h-screen">
+    <p className="text-gray-500">Loading...</p>
+  </div>
+);
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <NotFound />,
+    errorElement: (
+      <Suspense fallback={<Loader />}>
+        <NotFound />
+      </Suspense>
+    ),
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Home />
+          </Suspense>
+        ),
       },
       {
         path: "/product/:id",
-        element: <ProductDetail />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <ProductDetail />
+          </Suspense>
+        ),
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Cart />
+          </Suspense>
+        ),
       },
       {
         path: "/checkout",
-        element: <Checkout />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Checkout />
+          </Suspense>
+        ),
       },
     ],
   },
